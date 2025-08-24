@@ -18,6 +18,13 @@
     </properties>
 
     <dependencies>
+        <!-- JavaFX Base -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        
         <!-- JavaFX Controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -29,6 +36,13 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        
+        <!-- JavaFX Graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
         </dependency>
     </dependencies>

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "============================================="
+echo "      Building Strategy Pattern Demo"
+echo "============================================="
+echo
+
+echo "This will compile and package the application..."
+echo
+
+# Check if Maven is installed
+if ! command -v mvn &> /dev/null; then
+    echo "ERROR: Maven is not installed or not in PATH!"
+    echo "Please install Maven and try again."
+    echo "Download from: https://maven.apache.org/download.cgi"
+    echo
+    exit 1
+fi
+
+echo "Running: mvn clean package"
+echo
+mvn clean package
+
+if [ $? -ne 0 ]; then
+    echo
+    echo "ERROR: Build failed!"
+    echo "Please check the error messages above."
+    echo
+    exit 1
+fi
+
+echo
+echo "============================================="
+echo "          Build Successful!"
+echo "============================================="
+echo
+echo "The executable JAR has been created at:"
+echo "target/Strategy-Demo-1.0-SNAPSHOT-fat.jar"
+echo
+echo "You can now run the application using:"
+echo "- ./run.sh (Unix/Linux/macOS)"
+echo "- Or run: java -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar"
+echo

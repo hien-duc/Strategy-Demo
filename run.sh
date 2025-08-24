@@ -23,13 +23,23 @@ if [ "$JAVA_VERSION" -lt 17 ]; then
     echo
 fi
 
-# Run the application
-java --module-path "lib" --add-modules javafx.controls,javafx.fxml -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar
+# Check if the fat JAR exists
+if [ ! -f "target/Strategy-Demo-1.0-SNAPSHOT-fat.jar" ]; then
+    echo "ERROR: JAR file not found!"
+    echo "Please build the project first with: mvn clean package"
+    echo
+    exit 1
+fi
+
+# Run the application (fat JAR includes all JavaFX dependencies)
+java -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar
 
 if [ $? -ne 0 ]; then
     echo
     echo "ERROR: Failed to start the application!"
-    echo "Make sure you have built the project first with: mvn clean package"
+    echo "If you see JavaFX module errors, you may need to:"
+    echo "1. Install JavaFX separately"
+    echo "2. Use: java --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar"
     echo
     exit 1
 fi

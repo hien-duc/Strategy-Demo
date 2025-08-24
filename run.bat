@@ -16,13 +16,23 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-REM Run the application
-java --module-path "lib" --add-modules javafx.controls,javafx.fxml -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar
+REM Check if the fat JAR exists
+if not exist "target\Strategy-Demo-1.0-SNAPSHOT-fat.jar" (
+    echo ERROR: JAR file not found!
+    echo Please build the project first with: mvn clean package
+    echo.
+    pause
+    exit /b 1
+)
+
+REM Run the application (fat JAR includes all JavaFX dependencies)
+java -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar
 
 if %errorlevel% neq 0 (
     echo.
     echo ERROR: Failed to start the application!
-    echo Make sure you have built the project first with: mvn clean package
+    echo If you see JavaFX module errors, try:
+    echo java --module-path "C:\Program Files\Java\javafx-21.0.2\lib" --add-modules javafx.controls,javafx.fxml -jar target/Strategy-Demo-1.0-SNAPSHOT-fat.jar
     echo.
     pause
     exit /b 1
